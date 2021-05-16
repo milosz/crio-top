@@ -7,7 +7,7 @@ This is a playground to learn Go language.
 
 
 # sample output
-sample output using provided configuration
+Ssample output using provided configuration.
 
 ```
 $ crio-top --configuration configuration.yaml 
@@ -24,7 +24,7 @@ Date: Sun May 16 21:21:02 CEST 2021
 
 # sample configuration
 
-sample configuration 
+Sample configuration.
 
 ```
 application:
@@ -84,3 +84,4 @@ application:
       command: date +%s
       width: 10
 ```
+
