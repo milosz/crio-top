@@ -10,7 +10,7 @@ This is a playground to learn Go language.
 sample output using provided configuration
 
 ```
-$ crtop --configuration configuration.yaml 
+$ crio-top --configuration configuration.yaml 
 ```
 
 ```
