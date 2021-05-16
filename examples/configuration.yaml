@@ -1,0 +1,56 @@
+application:
+  header:
+    width:
+      server: 20
+    status: true
+  refresh:
+    window: 2
+    data: 2
+
+  servers:
+    - name: desktop
+      server: localhost
+      user: milosz
+      port: 22
+    - name: rpi-archivebox
+      server: 192.168.8.33
+      user: dietpi
+      port: 22
+    - name: rpi-nextcloud
+      server: 192.168.8.32
+      user: dietpi
+      port: 22
+
+  commands:
+    - name: machine
+      command: uname -m
+      width: 7
+    - name: lavg1
+      command: awk '{print $1}' /proc/loadavg
+      width: 6
+    - name: lavg5
+      command: awk '{print $2}' /proc/loadavg
+      width: 6
+    - name: lavg15
+      command: awk '{print $3}' /proc/loadavg
+      width: 6
+    - name: memory
+      command: free -h | awk '/^Mem/ {print $3"/"$2}'
+      width: 12
+    - name: swap
+      command: free -h | awk '/^Swap/ {print $3"/"$2}'
+      width: 12
+    - name: conn
+      command: ss -s | awk '/^INET/ {print $2}'
+      width: 5
+    - name: temp
+      command: >
+        if [ "$(uname -m)" = "armv7l" ]; then
+          awk '{ print int($1/1000)}' /sys/class/thermal/thermal_zone0/temp
+        else
+          grep -l x86_pkg_temp /sys/class/thermal/thermal_zone*/type | sed 's|/type$|/temp|' | xargs -I{} awk '{ print int($1/1000)}' {}
+        fi
+      width: 4
+    - name: timestamp
+      command: date +%s
+      width: 10
