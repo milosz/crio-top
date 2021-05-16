@@ -7,7 +7,7 @@ This is a playground to learn Go language.
 
 
 # sample output
-Ssample output using provided configuration.
+Sample output using provided configuration.
 
 ```
 $ crio-top --configuration configuration.yaml 
