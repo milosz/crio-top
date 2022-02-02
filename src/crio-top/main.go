@@ -14,8 +14,8 @@ import (
 var output io.Writer = os.Stdout
 
 func main() {
-	// load configuration
-	appConfiguration := configuration.New()
+	// load and parse configuration
+	appConfiguration := configuration.Initialize()
 
 	// create shared structures to display data
 	backgroundProcess := background.New(appConfiguration)

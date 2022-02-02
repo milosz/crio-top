@@ -5,7 +5,7 @@ import (
 )
 
 func TestParseConfiguration(t *testing.T) {
-	configuration := Application{
+	appConfiguration := Application{
 		Application: Configuration{
 			Config: struct{ Filename string }{
 				Filename: "../../examples/configuration.yaml",
@@ -13,18 +13,18 @@ func TestParseConfiguration(t *testing.T) {
 		},
 	}
 
-	configuration.ParseConfiguration()
+	appConfiguration.ParseConfiguration()
 
-	if configuration.Application.Header.Width.Server != 20 {
-		t.Errorf("expected \"%d\", but got \"%d\"", 20, configuration.Application.Header.Width.Server)
+	if appConfiguration.Application.Header.Width.Server != 20 {
+		t.Errorf("expected \"%d\", but got \"%d\"", 20, appConfiguration.Application.Header.Width.Server)
 	}
 
-	if configuration.Application.Servers[0].Name != "desktop" {
-		t.Errorf("expected \"%s\", but got \"%s\"", "desktop", configuration.Application.Servers[0].Name)
+	if appConfiguration.Application.Servers[0].Name != "desktop" {
+		t.Errorf("expected \"%s\", but got \"%s\"", "desktop", appConfiguration.Application.Servers[0].Name)
 	}
 
-	if configuration.Application.Commands[0].Command != "uname -m" {
-		t.Errorf("expected \"%s\", but got \"%s\"", "uname -m", configuration.Application.Commands[0].Command)
+	if appConfiguration.Application.Commands[0].Command != "uname -m" {
+		t.Errorf("expected \"%s\", but got \"%s\"", "uname -m", appConfiguration.Application.Commands[0].Command)
 	}
 
 }

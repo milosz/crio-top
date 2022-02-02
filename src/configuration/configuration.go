@@ -45,12 +45,16 @@ type Application struct {
 }
 
 // initialize configuration structures
-func New() (configuration *Application) {
+func Initialize() (configuration *Application) {
 	configuration = &Application{}
 
+	configuration.ParseFlags()
+	configuration.ParseConfiguration()
+
+	return configuration
+}
+
+func (configuration *Application) ParseFlags() {
 	flag.StringVar(&configuration.Application.Config.Filename, "configuration", "configuration.yaml", "path to a configuration file")
 	flag.Parse()
-
-	configuration.ParseConfiguration()
-	return configuration
 }
