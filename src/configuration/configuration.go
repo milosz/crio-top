@@ -3,6 +3,7 @@ package configuration
 
 import (
 	"flag"
+
 	"golang.org/x/crypto/ssh"
 )
 
@@ -19,7 +20,6 @@ type Configuration struct {
 		Width struct {
 			Server int
 		}
-		Status bool
 	}
 	Servers  []ServerConfiguration
 	Commands []CommandConfiguration
