@@ -6,8 +6,12 @@ import (
 	"golang/src/background"
 	"golang/src/configuration"
 	"golang/src/terminal"
+	"io"
+	"os"
 	"time"
 )
+
+var output io.Writer = os.Stdout
 
 func main() {
 	// load configuration
@@ -22,19 +26,19 @@ func main() {
 	// display results
 	for {
 		// clear screen and return to the right-left corner
-		terminal.Clear()
+		terminal.Clear(output)
 
 		// display date
-		terminal.CreateDateLine()
+		terminal.CreateDateLine(output, time.Now())
 
 		// create empty line
-		terminal.CreateEmptyLine()
+		terminal.CreateEmptyLine(output)
 
 		// display header
-		terminal.PrintHeader(appConfiguration)
+		terminal.PrintHeader(output, appConfiguration)
 
 		// display data
-		terminal.PrintRows(appConfiguration, backgroundProcess)
+		terminal.PrintRows(output, appConfiguration, backgroundProcess)
 
 		// sleep for a defined duration
 		time.Sleep(time.Duration(appConfiguration.Application.Refresh.Window) * time.Second)
