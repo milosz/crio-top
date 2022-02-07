@@ -31,7 +31,6 @@ application:
   header:
     width:
       server: 20
-    status: true
   refresh:
     window: 2
     data: 2
