@@ -13,13 +13,19 @@ type Output struct {
 	Servers []ServerOutput
 }
 
+type ServerExecution interface {
+	ExecuteOnServer(configuration *configuration.Application, output *ServerOutput)
+}
+
+type DefaultServerExecution struct{}
+
 type ServerOutput struct {
 	Server configuration.ServerConfiguration
 	Values []string
 }
 
 // initialize shared structures
-func New(configuration *configuration.Application) (output Output) {
+func Initialize(configuration *configuration.Application) (output Output) {
 	for i := range configuration.Application.Servers {
 		newServer := configuration.Application.Servers[i]
 
@@ -33,14 +39,16 @@ func New(configuration *configuration.Application) (output Output) {
 }
 
 // check data in the background
-func Execute(configuration *configuration.Application, output *Output) {
+func Execute(configuration *configuration.Application, output *Output, execution ServerExecution) {
 	for i := range output.Servers {
-		go ExecuteOnServer(configuration, &(*output).Servers[i])
+		go execution.ExecuteOnServer(configuration, &(*output).Servers[i])
 	}
+
 }
 
 // check data
-func ExecuteOnServer(configuration *configuration.Application, output *ServerOutput) {
+func (*DefaultServerExecution) ExecuteOnServer(configuration *configuration.Application, output *ServerOutput) {
+	//func (output *ServerOutput) ExecuteOnServer(configuration *configuration.Application) {
 	for {
 		SSHConnect(&output.Server)
 		for i := range configuration.Application.Commands {

@@ -18,10 +18,10 @@ func main() {
 	appConfiguration := configuration.Initialize()
 
 	// create shared structures to display data
-	backgroundProcess := background.New(appConfiguration)
+	backgroundProcess := background.Initialize(appConfiguration)
 
 	// run background processes
-	background.Execute(appConfiguration, &backgroundProcess)
+	background.Execute(appConfiguration, &backgroundProcess, &background.DefaultServerExecution{})
 
 	// display results
 	for {
