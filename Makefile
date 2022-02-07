@@ -5,9 +5,9 @@ run:
 	go run src/crio-top/main.go --configuration examples/configuration.yaml
 
 test:
-	go test ./src/...
+	go test ./src/background ./src/configuration ./src/terminal
 
 coverage:
-	go test -cover ./src/...
+	go test -cover ./src/background ./src/configuration ./src/terminal
 
 all: build
